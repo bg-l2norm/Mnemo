@@ -2,6 +2,12 @@
 
 Mnemo is a brain training app designed to help you learn and retain information using an advanced Spaced Repetition System (SRS).
 
+## Features
+
+- **Advanced SRS Scheduling**: Uses custom algorithms (Epoxy and SM2) to optimize your review sessions.
+- **Comprehensive Stats**: Track your progress with contribution heatmaps, retention rates, and session history.
+- **Customizable Decks**: Create your own decks or import/export existing ones via JSON.
+  
 ## Screenshots
 
 ### Hub
@@ -15,12 +21,6 @@ Detailed analytics of your learning journey, including a contribution graph and 
 ### Deck Detail
 Manage individual cards within a deck, with options to edit, reset, or export.
 ![Deck Detail](screenshots/deck_detail.png)
-
-## Features
-
-- **Advanced SRS Scheduling**: Uses custom algorithms (Epoxy and SM2) to optimize your review sessions.
-- **Comprehensive Stats**: Track your progress with contribution heatmaps, retention rates, and session history.
-- **Customizable Decks**: Create your own decks or import/export existing ones via JSON.
 
 ## Getting Started
 
