@@ -11236,8 +11236,8 @@ Error generating stack: ` +
         r = String(O.getDate()).padStart(2, "0");
       return `${O.getFullYear()}-${b}-${r}`;
     }
-    function mnStatsStreak(g) {
-      const O = new Set(mnNormalizeReviewLogs(g).map((D) => mnLocalDateKey(D.timestamp)).filter(Boolean));
+    function mnStatsStreak(O_logs) {
+      const O = new Set(O_logs.map((D) => mnLocalDateKey(D.timestamp)).filter(Boolean));
       if (O.size === 0) return "0 d";
       let b = new Date();
       b.setHours(0, 0, 0, 0);
@@ -11253,8 +11253,7 @@ Error generating stack: ` +
       }
       return `${r} d`;
     }
-    function mnStatsAccuracy(g) {
-      const O = mnNormalizeReviewLogs(g);
+    function mnStatsAccuracy(O) {
       return O.length ? (O.reduce((b, r) => b + r.similarity, 0) / O.length) * 100 : 0;
     }
     function Nh() {
@@ -11362,7 +11361,8 @@ Error generating stack: ` +
         const x = F > 0 ? (cl / F) * 100 : 100;
         return { due: G, total: C, retention: x, reviewed: F };
       }, [g, O]),
-        xl = ml.useMemo(() => mnStatsStreak(mnReviewLogs), [mnReviewLogs]),
+        J = ml.useMemo(() => mnNormalizeReviewLogs(mnReviewLogs), [mnReviewLogs]),
+        xl = ml.useMemo(() => mnStatsStreak(J), [J]),
         L = ml.useMemo(() => {
           const E = Date.now();
           return g.map((G) => {
@@ -11386,7 +11386,12 @@ Error generating stack: ` +
             return { due: C, reviewed: F, accuracy: _, avgLatency: q, maxLastReviewed: A };
           });
         }, [g, O]),
-        J = ml.useMemo(() => mnNormalizeReviewLogs(mnReviewLogs), [mnReviewLogs]),
+        mnGlobalSpeed = ml.useMemo(() => {
+          return J.length > 0 ? (J.reduce((E, G) => E + G.latencyMs, 0) / J.length / 1e3).toFixed(2) : null;
+        }, [J]),
+        mnGlobalAccuracy = ml.useMemo(() => {
+          return J.length > 0 ? Math.round(mnStatsAccuracy(J)) : null;
+        }, [J]),
         $ = ml.useMemo(() => {
           const E = {};
           for (const G of J) {
@@ -12085,7 +12090,7 @@ Rules:
                       }),
                       f.jsx("div", {
                         className: "num font-serif text-4xl mt-2 text-[color:var(--color-good)]",
-                        children: J.length > 0 ? `${Math.round(mnStatsAccuracy(J))}%` : "—",
+                        children: mnGlobalAccuracy !== null ? `${mnGlobalAccuracy}%` : "—",
                       }),
                     ],
                   }),
@@ -12099,10 +12104,7 @@ Rules:
                       }),
                       f.jsx("div", {
                         className: "num font-serif text-4xl mt-2",
-                        children:
-                          J.length > 0
-                            ? `${(J.reduce((E, G) => E + G.latencyMs, 0) / J.length / 1e3).toFixed(2)}s`
-                            : "—",
+                        children: mnGlobalSpeed !== null ? `${mnGlobalSpeed}s` : "—",
                       }),
                     ],
                   }),
