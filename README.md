@@ -1,6 +1,6 @@
 # Mnemo
 
-Mnemo is a minimalist, single-file brain training application designed to help you learn and retain information using an advanced Spaced Repetition System (SRS).
+Mnemo is a brain training app designed to help you learn and retain information using an advanced Spaced Repetition System (SRS).
 
 ## Features
 
@@ -8,8 +8,6 @@ Mnemo is a minimalist, single-file brain training application designed to help y
 - **Rich Card Types**: Supports multiple choice, typing, and cloze deletion cards.
 - **Comprehensive Stats**: Track your progress with contribution heatmaps, retention rates, and session history.
 - **Customizable Decks**: Create your own decks or import/export existing ones via JSON.
-- **Fluid UI**: A beautiful, responsive interface with smooth transitions and both dark and light mode support.
-- **Single File**: Built as a self-contained HTML file for easy portability and deployment.
 
 ## Screenshots
 
